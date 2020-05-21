@@ -1,0 +1,34 @@
+\documentclass{standalone}
+\usepackage{amsmath}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz} 
+\usetikzlibrary{arrows, decorations.markings,decorations.pathreplacing,angles,quotes}
+\usepackage{microtype}
+\usepackage{fourier}
+
+\definecolor{nblue}{RGB}{31, 119, 180}
+\definecolor{ngreen}{RGB}{44,160,44}
+ 
+\begin{document}
+
+\begin{tikzpicture}
+   		\node[anchor=south west,inner sep=0] (Bild) at (0,0) {\includegraphics[scale=0.39]{fig4_blank.pdf}};
+   		\begin{scope}[x=(Bild.south east),y=(Bild.north west)]
+        	\draw (0.515,-0.035) node {efficacy $\varepsilon_j$};
+        	\draw (-0.0,0.5) node [rotate=90] {establishment time (days)};
+
+        	\draw[nblue,thick] (0.15,0.84) -- node[right=6pt] {\scriptsize \color{black} reducing viral production $p$} (0.2,0.84);
+        	\draw[orange,thick] (0.15,0.77) -- node[right=6pt] {\scriptsize \color{black} reducing infectivity $\beta$} (0.2,0.77);
+        	\draw[ngreen,thick] (0.15,0.7) -- node[right=6pt] {\scriptsize \color{black} increasing infected} (0.2,0.7);
+        	\draw[black] (0.15,0.65) node[right=10.5pt] {\scriptsize cell death $\delta$};
+
+        	%\draw[black,thick] (0.15,0.6) -- node[right=6pt] {\scriptsize \color{black} $V_0=1$} (0.2,0.6);
+        	%\draw[black,thick,dotted] (0.15,0.53) -- node[right=6pt] {\scriptsize \color{black} $V_0 = 100$} (0.2,0.53);
+
+			\draw[black,thick] (0.84,0.15) node {\scriptsize $\varphi_\beta=0$};		
+			\draw[black,thick] (0.72,0.2) node {\scriptsize $\varphi_p=0$};			
+			
+    		\end{scope}
+\end{tikzpicture}
+
+\end{document}
