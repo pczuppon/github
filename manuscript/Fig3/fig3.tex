@@ -14,14 +14,16 @@
 	\node[anchor=south west,inner sep=0] (Bild) at (0,0) {\includegraphics[scale=0.39]{fig3_blank.pdf}};
    		\begin{scope}[x=(Bild.south east),y=(Bild.north west)]
         	\draw (0.5,-0.035) node {antiviral drug efficacy $\varepsilon_j$};
-        	\draw (0.01,0.5) node [rotate=90] {establishment probability $\varphi_j$};
-        	\draw[thick] (0.175,0.4) --  (0.225,0.4);
-        	\draw (0.175,0.425) node[right=10pt] {\scriptsize reducing $p$,};
-        	\draw (0.175,0.375) node[right=10pt] {\scriptsize increasing $\delta$};
-        	\draw[thick,dashed] (0.175,0.3) -- node[right=6pt] {\scriptsize reducing $p$ and $\beta$} (0.225,0.3);
-        	\draw[black,thick,dotted] (0.175,0.2) -- (0.225,0.2);
-        	\draw (0.175,0.225) node[right=10pt] {\scriptsize reducing $\beta$,};
-        	\draw (0.175,0.175) node[right=10pt] {\scriptsize increasing $c$};
+        	\draw (-0.01,0.5) node [rotate=90] {est. probability $\varphi_j$};
+        	\draw[thick] (0.1,0.955) --  (0.15,0.955);
+        	\draw (0.1,0.98) node[right=10pt] {\scriptsize reducing $p$,};
+        	\draw (0.1,0.93) node[right=10pt] {\scriptsize increasing $\delta$};
+        	\draw[thick,dashed] (0.41,0.955) -- (0.46,0.955);
+			\draw (0.41,0.98) node[right=10pt] {\scriptsize reducing $p$,};
+			\draw (0.41,0.93) node[right=10pt] {\scriptsize reducing $\beta$};
+        	\draw[black,thick,dotted] (0.71,0.955) -- (0.76,0.955);
+        	\draw (0.71,0.98) node[right=10pt] {\scriptsize reducing $\beta$,};
+        	\draw (0.71,0.93) node[right=10pt] {\scriptsize increasing $c$};
 
 			\draw[nblue,thick] (0.6,0.83) -- node[right=6pt] {\scriptsize \color{black} reducing $p$} (0.65,0.83);
 			\draw[orange,thick] (0.6,0.78) -- node[right=6pt] {\scriptsize \color{black} reducing $\beta$}(0.65,0.78);

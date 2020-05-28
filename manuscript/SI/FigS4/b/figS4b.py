@@ -19,9 +19,9 @@ R0 = 7
 k = 5
 delta = 0.58
 c = 10.
-p = 13.2
+p = 116
 N = p/delta
-T = 6*10**6
+T = 4.9*10**5
 
 beta = c*delta*R0/((p-delta*R0)*T)
 
@@ -100,8 +100,8 @@ plt.plot(gens_plotbeta,np.array(pbeta)/(1/k + 1/(beta*T + c) + 1/delta),linewidt
 ################################ Import Data
 ################################
 ################################ Reducing burst size
-data1 = genfromtxt('ext_LN_V0_100_eps_0.9_sc_2_model_1.txt', delimiter=',')
-data2 = genfromtxt('ext_LN_V0_100_eps_0.9_sc_1_model_1.txt', delimiter=',')
+data1 = genfromtxt('ext_HN_V0_100_eps_0.9_sc_2_model_1.txt', delimiter=',')
+data2 = genfromtxt('ext_HN_V0_100_eps_0.9_sc_1_model_1.txt', delimiter=',')
 
 plt.hist(data1,bins=12*len(gens),density=True,color='C3',alpha = 0.7)  
 plt.hist(data2,bins=12*len(gens),density=True,color='C1',alpha = 0.7)
@@ -111,6 +111,6 @@ plt.hist(data2,bins=12*len(gens),density=True,color='C1',alpha = 0.7)
 plt.tick_params(axis='both', which='major', labelsize=15, width=1, length=10)
 plt.tick_params(axis='both', which='minor', labelsize=10, width=1, length=5)
 
-plt.xlim((0,40))
+plt.xlim((0,2))
 plt.show()
 

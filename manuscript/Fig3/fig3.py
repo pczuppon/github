@@ -20,9 +20,9 @@ R0 = 7
 k = 5
 delta = 0.58
 c = 10.
-p = 13.2
+p = 116
 B = p/delta
-T = 6000000
+T = 490000
 
 beta = c*delta*R0/((p-delta*R0)*T)
 
@@ -35,7 +35,7 @@ V0 = 10
 ################################
 
 ################################ Reducing burst size (2x)
-my_data = genfromtxt('comb_LN_V0_%s_sc_0.txt' % V0, delimiter=',')
+my_data = genfromtxt('comb_HN_V0_%s_sc_0.txt' % V0, delimiter=',')
 
 data1 = []
 eps_data1 = []
@@ -44,7 +44,7 @@ for i in range(len(my_data)):
     eps_data1.append(float(my_data[i][0]))
 
 ################################ Reducing burst size + infectivity
-my_data = genfromtxt('comb_LN_V0_%s_sc_1.txt' % V0, delimiter=',')
+my_data = genfromtxt('comb_HN_V0_%s_sc_1.txt' % V0, delimiter=',')
 
 data2 = []
 eps_data2 = []
@@ -53,7 +53,7 @@ for i in range(len(my_data)):
     eps_data2.append(float(my_data[i][0]))
 
 ################################ Reducing infectivity (2x)
-my_data = genfromtxt('comb_LN_V0_%s_sc_2.txt' % V0, delimiter=',')
+my_data = genfromtxt('comb_HN_V0_%s_sc_2.txt' % V0, delimiter=',')
 
 data3 = []
 eps_data3 = []
@@ -105,7 +105,7 @@ plt.plot(eps_data2,data2,'o',color='black',markersize=10)
 plt.plot(eps,surv3,linewidth=3,color='black',linestyle='dotted')
 plt.plot(eps_data3,data3,'o',color='black',markersize=10)
 
-plt.ylim((-0.05,1.05))
+plt.ylim((-0.025,.3))
 plt.tick_params(axis='both', which='major', labelsize=15, width=1, length=10)
 plt.tick_params(axis='both', which='minor', labelsize=10, width=1, length=5)
 plt.show()

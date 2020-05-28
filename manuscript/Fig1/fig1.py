@@ -190,6 +190,7 @@ plt.plot(t,Vfull,linewidth=2,color='C3')
 ################# Load plot
 #plt.ylim((0,5*10**8))
 plt.xlim((0,30))
+plt.plot(t,[10**(1.84)]*len(t), linewidth=2,linestyle='dotted',color='black')
 plt.tick_params(axis='both', which='major', labelsize=15, width=1, length=10)
 plt.tick_params(axis='both', which='minor', labelsize=10, width=1, length=5)
 plt.show()

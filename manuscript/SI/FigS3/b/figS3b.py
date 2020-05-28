@@ -19,9 +19,9 @@ R0 = 7
 k = 5
 delta = 0.58
 c = 10.
-p = 13.2
+p = 116
 N = p/delta
-T0 = 6*10**6
+T0 = 4.9*10**5
 
 beta = c*delta*R0/((p-delta*R0)*T0)
 
@@ -109,12 +109,12 @@ plt.plot(gens_plotdelta,np.array(pdelta)/(1/k + 1/(beta*T0 + c) + (1-eps)/delta)
 ################################
 ################################ Import Data
 ################################
-data1 = genfromtxt('ext_LN_V0_100_eps_0.9_sc_0_model_1.txt', delimiter=',')
-data2 = genfromtxt('ext_LN_V0_100_eps_0.9_sc_1_model_1.txt', delimiter=',')
-data4 = genfromtxt('ext_LN_V0_100_eps_0.9_sc_3_model_1.txt', delimiter=',')
+data1 = genfromtxt('ext_HN_V0_100_eps_0.9_sc_0_model_1.txt', delimiter=',')
+data2 = genfromtxt('ext_HN_V0_100_eps_0.9_sc_1_model_1.txt', delimiter=',')
+data4 = genfromtxt('ext_HN_V0_100_eps_0.9_sc_3_model_1.txt', delimiter=',')
 
-plt.hist(data1,bins=4*len(gens),density=True,color='C0',alpha = 0.7)  
-plt.hist(data4,bins=8*len(gens),density=True,color='C2',alpha = 0.7)
+plt.hist(data1,bins=8*len(gens),density=True,color='C0',alpha = 0.7)  
+plt.hist(data4,bins=4*len(gens),density=True,color='C2',alpha = 0.7)
 plt.hist(data2,bins=8*len(gens),density=True,color='C1',alpha = 0.7)
 
 
@@ -122,7 +122,7 @@ plt.tick_params(axis='both', which='major', labelsize=15, width=1, length=10)
 plt.tick_params(axis='both', which='minor', labelsize=10, width=1, length=5)
 
 
-plt.xlim((0,50))
+plt.xlim((0,10))
 plt.show()
 
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.9.3)  6 MAY 2020 10:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.9.3)  27 MAY 2020 15:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -673,7 +673,7 @@ LaTeX Font Info:    Redeclaring math accent \dot on input line 255.
 LaTeX Font Info:    Redeclaring math accent \mathring on input line 256.
 \symUfutm=\mathgroup5
 )
-No file figS4a.aux.
+(./figS4a.aux)
 \openout1 = `figS4a.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
@@ -691,7 +691,7 @@ LaTeX Font Info:    ... okay on input line 13.
 LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 13.
 LaTeX Font Info:    Try loading font information for FML+futm on input line 13.
 
-(/usr/share/texlive/texmf-dist/tex/latex/fourier/fmlfutm.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmlfutm.fd
 File: fmlfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futm.
 )
 LaTeX Font Info:    ... okay on input line 13.
@@ -822,8 +822,8 @@ LaTeX Font Info:    Font shape `U/futm/m/n' will be
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./figS4a_blank.pdf>] (./fi
 gS4a.aux) ) 
 Here is how much of TeX's memory you used:
- 15880 strings out of 492982
- 320291 string characters out of 6134897
+ 15882 strings out of 492982
+ 320313 string characters out of 6134897
  366544 words of memory out of 5000000
  19116 multiletter control sequences out of 15000+600000
  29983 words of font info for 43 fonts, out of 8000000 for 9000
@@ -833,9 +833,9 @@ Here is how much of TeX's memory you used:
 re/texlive/texmf-dist/fonts/type1/public/fourier/fourier-mlit.pfb></usr/share/t
 exlive/texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/adobe/utopia/putri8a.pfb>
-Output written on figS4a.pdf (1 page, 49767 bytes).
+Output written on figS4a.pdf (1 page, 49273 bytes).
 PDF statistics:
- 36 PDF objects out of 1000 (max. 8388607)
+ 39 PDF objects out of 1000 (max. 8388607)
  23 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  7698 words of extra memory for PDF output out of 10000 (max. 10000000)

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.9.3)  6 MAY 2020 10:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.9.3)  27 MAY 2020 14:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -817,9 +817,9 @@ Here is how much of TeX's memory you used:
  55i,8n,65p,472b,653s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/sha
 re/texlive/texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb>
-Output written on figS3b.pdf (1 page, 36044 bytes).
+Output written on figS3b.pdf (1 page, 35768 bytes).
 PDF statistics:
- 30 PDF objects out of 1000 (max. 8388607)
+ 31 PDF objects out of 1000 (max. 8388607)
  17 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6162 words of extra memory for PDF output out of 10000 (max. 10000000)

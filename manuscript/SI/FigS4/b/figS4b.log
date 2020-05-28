@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.9.3)  6 MAY 2020 10:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.9.3)  27 MAY 2020 15:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -673,7 +673,7 @@ LaTeX Font Info:    Redeclaring math accent \dot on input line 255.
 LaTeX Font Info:    Redeclaring math accent \mathring on input line 256.
 \symUfutm=\mathgroup5
 )
-No file figS4b.aux.
+(./figS4b.aux)
 \openout1 = `figS4b.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
@@ -691,7 +691,7 @@ LaTeX Font Info:    ... okay on input line 11.
 LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 11.
 LaTeX Font Info:    Try loading font information for FML+futm on input line 11.
 
-(/usr/share/texlive/texmf-dist/tex/latex/fourier/fmlfutm.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmlfutm.fd
 File: fmlfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futm.
 )
 LaTeX Font Info:    ... okay on input line 11.
@@ -808,8 +808,8 @@ Package pdftex.def Info: figS4b_blank.pdf  used on input line 14.
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./figS4b_blank.pdf>] (./fi
 gS4b.aux) ) 
 Here is how much of TeX's memory you used:
- 15820 strings out of 492982
- 319186 string characters out of 6134897
+ 15822 strings out of 492982
+ 319208 string characters out of 6134897
  365454 words of memory out of 5000000
  19072 multiletter control sequences out of 15000+600000
  9592 words of font info for 24 fonts, out of 8000000 for 9000
@@ -817,7 +817,7 @@ Here is how much of TeX's memory you used:
  55i,8n,65p,472b,653s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/sha
 re/texlive/texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb>
-Output written on figS4b.pdf (1 page, 38655 bytes).
+Output written on figS4b.pdf (1 page, 38186 bytes).
 PDF statistics:
  31 PDF objects out of 1000 (max. 8388607)
  17 compressed objects within 1 object stream
