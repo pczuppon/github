@@ -1,0 +1,10 @@
+name: shiny
+title:
+username:
+account: fdebarre
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2556424
+bundleId: 3376300
+url: https://fdebarre.shinyapps.io/shiny/
+when: 1594387725.13589
