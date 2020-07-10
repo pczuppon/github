@@ -18,7 +18,7 @@ using namespace std;
 #define p 116.0             // continuous viral production
 
 // Initial variables
-#define T0 490000         // initial number of target cells (30ml resp tract * 2*10^5 cells /ml)
+#define T0 39900         // initial number of target cells (30ml resp tract * 2*10^5 cells /ml)
 #define V0 1            // initial number of viruses
 #define E0 0           // initial number of eclipse phase cells
 #define I0 0            // initial number of infected cells

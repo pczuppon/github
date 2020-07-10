@@ -2,8 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 from numpy import genfromtxt
-from scipy.special import lambertw
-from scipy.optimize import fsolve
 
 ################################
 ################################ data
@@ -22,7 +20,7 @@ delta = 0.58
 c = 10.
 p = 116
 B = p/delta
-T = 490000
+T = 40000
 
 beta = c*delta*R0/((p-delta*R0)*T)
 

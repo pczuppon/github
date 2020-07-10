@@ -15,10 +15,10 @@ using namespace std;
 #define k 5.0           // eclipse phase: I_1 -> I_2
 #define delta 0.58        // cell death
 #define c 10.0           // virus clearance
-#define p 13.2             // continuous viral production
+#define p 11.6             // continuous viral production
 
 // Initial variables
-#define T0 6000000        // initial number of target cells (30ml resp tract * 2*10^5 cells /ml)
+#define T0 399000        // initial number of target cells (30ml resp tract * 2*10^5 cells /ml)
 #define V0 10            // initial number of viruses
 #define E0 0           // initial number of eclipse phase cells
 #define I0 0            // initial number of infected cells

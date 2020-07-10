@@ -15,11 +15,11 @@ using namespace std;
 #define k 5.0           // eclipse phase: I_1 -> I_2
 #define delta 0.58        // cell death
 #define c 10.0           // virus clearance
-#define p 13.2             // continuous viral production
+#define p 116             // continuous viral production
 
 // Initial variables
-#define T0 6000000        // initial number of target cells (30ml resp tract * 2*10^5 cells /ml)
-#define V0 100            // initial number of viruses
+#define T0 40000        // initial number of target cells (30ml resp tract * 2*10^5 cells /ml)
+#define V0 10            // initial number of viruses
 #define E0 0           // initial number of eclipse phase cells
 #define I0 0            // initial number of infected cells
 
@@ -75,7 +75,7 @@ int RUN(double eps, int scenario, int model)
     // Burst model
     if (model == 0)
     {
-        while(( V>0 || E > 0 || I > 0 ) && V <= 1000)
+        while(( V>0 || E > 0 || I > 0 ) && V <= 20)
         {
             // Update
             int update = 0;         // verification of update (while = 0 keep on searching for the index to update)
@@ -172,7 +172,7 @@ int RUN(double eps, int scenario, int model)
     // Continuous output model
     else
     {
-        while(( V>0 || E > 0 || I > 0 ) && V <= 1000)
+        while(( V>0 || E > 0 || I > 0 ) && V <= 20)
         {
             // Update
             int update = 0;         // verification of update (while = 0 keep on searching for the index to update)
@@ -277,7 +277,7 @@ int RUN(double eps, int scenario, int model)
     if (V > 0)
     {
         return_value = 1;
-        ofstream file ("esttime_LN_V0_100_eps_" + to_string(eps) + "_sc_" + to_string(scenario) + "_model_" + to_string(model) + ".txt", ios::app);   // file output, average
+        ofstream file ("esttime_LN_V0_10_eps_" + to_string(eps) + "_sc_" + to_string(scenario) + "_model_" + to_string(model) + ".txt", ios::app);   // file output, average
         file << t;  
         file << "\n";
         file.close();

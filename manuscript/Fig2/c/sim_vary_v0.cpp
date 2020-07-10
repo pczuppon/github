@@ -15,11 +15,11 @@ using namespace std;
 #define k 5.0           // eclipse phase: I_1 -> I_2
 #define delta 0.58        // cell death
 #define c 10.0           // virus clearance
-#define p 13.2             // continuous viral production
-#define eps 0           // drug efficacy
+#define p 11.6             // continuous viral production
+#define eps 0.5           // drug efficacy
 
 // Initial variables
-#define T0 6000000        // initial number of target cells (30ml resp tract * 2*10^5 cells /ml)
+#define T0 390000        // initial number of target cells (30ml resp tract * 2*10^5 cells /ml)
 #define E0 0           // initial number of eclipse phase cells
 #define I0 0            // initial number of infected cells
 
@@ -51,7 +51,7 @@ int main(int argc,char *argv[])
     double avg;                                  // empirical survival probability of R
     avg = (double)success/(double)repeats;
     
-    ofstream file ("surv_LB_eps_0_sc_" + std::to_string(scenario) + "_model_" + std::to_string(model) + ".txt", ios::app);   // file output, average
+    ofstream file ("surv_LN_eps_05_sc_" + std::to_string(scenario) + "_model_" + std::to_string(model) + ".txt", ios::app);   // file output, average
     file << V0;
     file << ",";
     file << avg;  
