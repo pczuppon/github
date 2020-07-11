@@ -11,20 +11,21 @@
 using namespace std;
 
 // Within-host parameters
-#define R0 7.0             // R0 value
+#define R0 7.69             // R0 value
 #define k 5.0           // eclipse phase: I_1 -> I_2
-#define delta 0.58        // cell death
+#define delta 0.595        // cell death
 #define c 10.0           // virus clearance
-#define p 116             // continuous viral production
+#define p 11200             // continuous viral production
+#define mu 0.001
 
 // Initial variables
 #define T0 40000         // initial number of target cells (30ml resp tract * 2*10^5 cells /ml)
-#define V0 10            // initial number of viruses
+#define V0 1            // initial number of viruses
 #define E0 0           // initial number of eclipse phase cells
 #define I0 0            // initial number of infected cells
 
-double B = p/delta;         // burst mean
-double beta = R0*c*delta/((p-delta*R0)*(double)T0);    // virus infectivity
+double B = mu*p/delta;         // burst mean
+double beta = R0*c*delta/((mu*p-delta*R0)*(double)T0);    // virus infectivity
 
 // Random number generation with Mersenne Twister
 gsl_rng * r = gsl_rng_alloc (gsl_rng_mt19937);
@@ -50,7 +51,7 @@ int main(int argc,char *argv[])
     double avg;                                  // empirical survival probability of R
     avg = (double)success/(double)repeats;
     
-    ofstream file ("comb_HN_V0_10_sc_" + std::to_string(scenario) + ".txt", ios::app);   // file output, average
+    ofstream file ("comb_HN_V0_1_sc_" + std::to_string(scenario) + ".txt", ios::app);   // file output, average
     file << eps;
     file << ",";
     file << avg;  
@@ -75,7 +76,7 @@ int RUN(double eps, int sc)
     V = V0;
     
     // Simulation
-    while(( V>0 || E > 0 || I > 0 ) && V <= 1000)
+    while(( V>0 || E > 0 || I > 0 ) && V <= 500)
     {
         // Update
         int update = 0;         // verification of update (while = 0 keep on searching for the index to update)
@@ -89,7 +90,7 @@ int RUN(double eps, int sc)
             rates[0] = beta*(double)T*(double)V;      // virus infecting cell
             rates[1] = k*(double)E;                         // leaving eclipse phase
             rates[2] = delta*(double)I/(1-eps);                     // cell death
-            rates[3] = p*(1-eps)*(double)I;                 // virus production
+            rates[3] = mu*p*(1-eps)*(double)I;                 // virus production
             rates[4] = c*(double)V;                         // virus clearance
         }
         
@@ -98,7 +99,7 @@ int RUN(double eps, int sc)
             rates[0] = beta*(1-eps)*(double)T*(double)V;      // virus infecting cell
             rates[1] = k*(double)E;                         // leaving eclipse phase
             rates[2] = delta*(double)I;                     // cell death
-            rates[3] = p*(1-eps)*(double)I;                 // virus production
+            rates[3] = mu*p*(1-eps)*(double)I;                 // virus production
             rates[4] = c*(double)V;                         // virus clearance
         }   
         
@@ -107,7 +108,7 @@ int RUN(double eps, int sc)
             rates[0] = beta*(1-eps)*(double)T*(double)V;      // virus infecting cell
             rates[1] = k*(double)E;                         // leaving eclipse phase
             rates[2] = delta*(double)I;                     // cell death
-            rates[3] = p*(double)I;                 // virus production
+            rates[3] = mu*p*(double)I;                 // virus production
             rates[4] = c*(double)V/(1-eps);                         // virus clearance
         }   
                                                  

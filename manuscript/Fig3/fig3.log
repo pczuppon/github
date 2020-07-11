@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100) (preloaded format=pdflatex 2016.12.15)  1 JUL 2020 13:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100) (preloaded format=pdflatex 2016.12.15)  10 JUL 2020 21:45
 entering extended mode
 **./fig3.tex
 (fig3.tex
@@ -874,9 +874,9 @@ se/8r.enc}<C:/Users/pete/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/fourier/
 fourier-mlit.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/adobe/utopia/pu
 tr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/adobe/utopia/putri8a.pf
 b>
-Output written on fig3.pdf (1 page, 38709 bytes).
+Output written on fig3.pdf (1 page, 38461 bytes).
 PDF statistics:
- 41 PDF objects out of 1000 (max. 8388607)
+ 40 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  8210 words of extra memory for PDF output out of 10000 (max. 10000000)
 

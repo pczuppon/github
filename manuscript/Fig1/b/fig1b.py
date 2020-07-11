@@ -158,7 +158,7 @@ for i in range(len(load)):
 
 ################ add data points
 ######### France
-t = np.arange(0,5.5+dt,dt)
+t = np.arange(0,7.5+dt,dt)
 
 R0 = 3
 frac_France = 10**(-2)
@@ -199,19 +199,19 @@ while (update == 0):
     if (np.max(Vtot)==Vtot[-1] or np.max(Vtot)==Vtot[0]):
         R0 += 0.1
     else:
-    	tmax = np.where(Vtot == np.max(Vtot))[0][0]*dt
+        tmax = np.where(Vtot == np.max(Vtot))[0][0]*dt
         if (np.max(Vtot) < 2*10**6):
-        	if (tmax > 5):
+            if (tmax > 7):
                 R0 += 0.1
             else:
-                frac_France += 10**(-2)
+                frac_France += 10**(-3)
                 R0 = 3
         else:
-            if (tmax <= 5):
+            if (tmax <= 7):
                 res_France = R0
                 update = 1
             else:
-           	    R0 += 0.1
+                R0 += 0.1
 
 plt.plot(frac_France/100,res_France,marker="o",color="gray",markersize=10)
 
@@ -255,12 +255,12 @@ while (update == 0):
     if (np.max(Vtot)==Vtot[-1] or np.max(Vtot)==Vtot[0]):
         R0 += 0.1
     else:
-    	tmax = np.where(Vtot == np.max(Vtot))[0][0]*dt
+        tmax = np.where(Vtot == np.max(Vtot))[0][0]*dt
         if (np.max(Vtot) < 10**6):
-        	if (tmax > 5):
+            if (tmax > 5):
                 R0 += 0.1
             else:
-                frac_Sing += 10**(-2)
+                frac_Sing += 10**(-3)
                 R0 = 3
         else:
             if (tmax <= 5):
@@ -269,7 +269,7 @@ while (update == 0):
             else:
                 R0 += 0.1
 
-plt.plot(frac_Sing/100,res_Sing,marker="o",color="black",markersize=9)
+plt.plot(frac_Sing/100,res_Sing,marker="o",color="black",markersize=10)
 
 ################# Germany
 R0 = 3
@@ -312,17 +312,17 @@ while (update == 0):
         R0 += 0.1
     else:
         if (np.max(Vtot) < 7*10**5):
-            frac_Sing += 10**(-2)
+            frac_Ger += 10**(-3)
             R0 = 3
         else:
             tmax = np.where(Vtot == np.max(Vtot))[0][0]*dt
-            if (tmax <= 5):
+            if (tmax <= 7):
                 res_Ger = R0
                 update = 1
             else:
                 R0 += 0.1
 
-plt.plot(frac_Ger/100,res_Ger,marker="o",color="white",markersize=8)
+plt.plot(frac_Ger/100,res_Ger,marker="o",color="lightgrey",markersize=10)
 
 ########################## Finish plot
 plt.ylim((0,20))

@@ -11,20 +11,21 @@
 using namespace std;
 
 // Within-host parameters
-#define R0 7.             // R0 value
+#define R0 7.69             // R0 value
 #define k 5.0           // eclipse phase: I_1 -> I_2
-#define delta 0.58        // cell death
+#define delta 0.595        // cell death
 #define c 10.0           // virus clearance
-#define p 11.6             // continuous viral production
+#define p 11200             // continuous viral production
 #define eps 0.5           // drug efficacy
+#define mu 0.001
 
 // Initial variables
-#define T0 390000        // initial number of target cells (30ml resp tract * 2*10^5 cells /ml)
+#define T0 40000        // initial number of target cells (30ml resp tract * 2*10^5 cells /ml)
 #define E0 0           // initial number of eclipse phase cells
 #define I0 0            // initial number of infected cells
 
-double B = p/delta;         // burst mean
-double beta = R0*c*delta/((p-delta*R0)*(double)T0);    // virus infectivity
+double B = mu*p/delta;         // burst mean
+double beta = R0*c*delta/((mu*p-delta*R0)*(double)T0);    // virus infectivity
 
 // Random number generation with Mersenne Twister
 gsl_rng * r = gsl_rng_alloc (gsl_rng_mt19937);
@@ -79,7 +80,7 @@ int RUN(int V0, int scenario, int model)
     // Burst model
     if (model == 0)
     {
-        while(( V>0 || E > 0 || I > 0 ) && V <= 1000)
+        while(( V>0 || E > 0 || I > 0 ) && V <= 500)
         {
             // Update
             int update = 0;         // verification of update (while = 0 keep on searching for the index to update)
@@ -176,7 +177,7 @@ int RUN(int V0, int scenario, int model)
     // Continuous output model
     else
     {
-        while(( V>0 || E > 0 || I > 0 ) && V <= 1000)
+        while(( V>0 || E > 0 || I > 0 ) && V <= 500)
         {
             // Update
             int update = 0;         // verification of update (while = 0 keep on searching for the index to update)
@@ -191,7 +192,7 @@ int RUN(int V0, int scenario, int model)
                 rates[0] = beta*(double)T*(double)V;            // virus infecting cell
                 rates[1] = k*(double)E;                         // leaving eclipse phase
                 rates[2] = delta*(double)I;                     // cell death
-                rates[3] = p*(1-eps)*(double)I;                 // virus production
+                rates[3] = mu*p*(1-eps)*(double)I;                 // virus production
                 rates[4] = c*(double)V;                         // virus clearance
             }
                 
@@ -201,7 +202,7 @@ int RUN(int V0, int scenario, int model)
                 rates[0] = beta*(1-eps)*(double)T*(double)V;    // virus infecting cell
                 rates[1] = k*(double)E;                         // leaving eclipse phase
                 rates[2] = delta*(double)I;                     // cell death
-                rates[3] = p*(double)I;                         // virus production
+                rates[3] = mu*p*(double)I;                         // virus production
                 rates[4] = c*(double)V;                         // virus clearance
             }     
             
@@ -211,7 +212,7 @@ int RUN(int V0, int scenario, int model)
                 rates[0] = beta*(double)T*(double)V;    // virus infecting cell
                 rates[1] = k*(double)E;                         // leaving eclipse phase
                 rates[2] = delta*(double)I;                     // cell death
-                rates[3] = p*(double)I;                         // virus production
+                rates[3] = mu*p*(double)I;                         // virus production
                 rates[4] = c*(double)V/(1-eps);                 // virus clearance
             }
                       

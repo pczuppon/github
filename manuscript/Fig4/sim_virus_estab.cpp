@@ -11,20 +11,22 @@
 using namespace std;
 
 // Within-host parameters
-#define R0 7.             // R0 value
+#define R0 7.69             // R0 value
 #define k 5.0           // eclipse phase: I_1 -> I_2
-#define delta 0.58        // cell death
+#define delta 0.595        // cell death
 #define c 10.0           // virus clearance
-#define p 116             // continuous viral production
+#define p 11200             // continuous viral production
+#define mu 0.001
 
 // Initial variables
-#define T0 40000        // initial number of target cells (30ml resp tract * 2*10^5 cells /ml)
-#define V0 10            // initial number of viruses
+#define T0 40000        // initial number of target cells
+#define V0 1            // initial number of infectious virions
 #define E0 0           // initial number of eclipse phase cells
 #define I0 0            // initial number of infected cells
+#define W0 0			// initial number of non-infectious virions
 
 double B = p/delta;         // burst mean
-double beta = R0*c*delta/((p-delta*R0)*(double)T0);    // virus infectivity
+double beta = R0*c*delta/((mu*p-delta*R0)*(double)T0);    // virus infectivity
 
 // Random number generation with Mersenne Twister
 gsl_rng * r = gsl_rng_alloc (gsl_rng_mt19937);
@@ -60,7 +62,7 @@ int main(int argc,char *argv[])
 // Stochastic simulation
 int RUN(double eps, int scenario, int model)
 {
-    int T, E, I, V;              // auxiliary variables (sensitive, resistant type)
+    int T, E, I, V, W;              // auxiliary variables (sensitive, resistant type)
     double t;                    // auxiliary variable (time) 
     int return_value = 0;        // return value (0 if V=0, 1 if V>1 at the end)
         
@@ -70,19 +72,20 @@ int RUN(double eps, int scenario, int model)
     E = E0;
     I = I0;
     V = V0;
+    W = W0;
     
     // Simulation
     // Burst model
     if (model == 0)
     {
-        while(( V>0 || E > 0 || I > 0 ) && V <= 20)
+        while(( V>0 || E > 0 || I > 0 ) && V + W <= 2000)
         {
             // Update
             int update = 0;         // verification of update (while = 0 keep on searching for the index to update)
             int ind = 0;            // index for the transition to update
           
             // Transition rate vector
-            double rates[4];
+            double rates[5];
             
             // Reduction of burst size scenario
             if (scenario == 0)
@@ -91,6 +94,7 @@ int RUN(double eps, int scenario, int model)
                 rates[1] = k*(double)E;                         // leaving eclipse phase
                 rates[2] = delta*(double)I;                     // cell death
                 rates[3] = c*(double)V;                         // virus clearance
+                rates[4] = c*(double)W;							// virus clearance
             }
                 
             // Reduction of infectivity scenario
@@ -100,6 +104,7 @@ int RUN(double eps, int scenario, int model)
                 rates[1] = k*(double)E;                         // leaving eclipse phase
                 rates[2] = delta*(double)I;                     // cell death
                 rates[3] = c*(double)V;                         // virus clearance
+                rates[4] = c*(double)W;							// virus clearance
             }   
             
             // Increase of virus clearance
@@ -109,12 +114,13 @@ int RUN(double eps, int scenario, int model)
                 rates[1] = k*(double)E;                         // leaving eclipse phase
                 rates[2] = delta*(double)I;                     // cell death
                 rates[3] = c*(double)V/(1-eps);                         // virus clearance
+                rates[4] = c*(double)W/(1-eps);					// virus clearance
             }   
                       
             // Draw two uniform random numbers for updating
             double rand1, dt;
             rand1 = gsl_ran_flat(r, 0.0, 1.0);  
-            dt = gsl_ran_exponential(r, 1/accumulate(rates,rates+4,0.));  
+            dt = gsl_ran_exponential(r, 1/accumulate(rates,rates+5,0.));  
             
             // Time update
             t += dt;
@@ -122,7 +128,7 @@ int RUN(double eps, int scenario, int model)
             // Population update
             while (update == 0)
             {
-                if (rand1 < accumulate(rates,rates+ind+1,0.)/accumulate(rates,rates+4,0.))
+                if (rand1 < accumulate(rates,rates+ind+1,0.)/accumulate(rates,rates+5,0.))
                 {
                     update = 1;
                     
@@ -147,21 +153,28 @@ int RUN(double eps, int scenario, int model)
                         I = I-1;
                         if (scenario == 0)
                         {
-                            V = V + gsl_ran_poisson(r,(1-eps)*B);
+                            V = V + gsl_ran_poisson(r,(1-eps)*mu*B);
+                            W = W + gsl_ran_poisson(r,(1-eps)*(1-mu)*B);
                         }
                         
                         else
                         {
-                            V = V + gsl_ran_poisson(r, B);
+                            V = V + gsl_ran_poisson(r, mu*B);
+                            W = W + gsl_ran_poisson(r, (1-mu)*B);
                         }
                     }                
                     
-                    // virus death
-                    else
+                    // virus death (infectious)
+                    else if (ind == 3)
                     {
                         V = V-1;
                     }
-                    
+
+                    // virus death (non-infectious)
+                    else
+                    {
+                        W = W-1;
+                    }
                 }
                
                 ind++;
@@ -172,14 +185,14 @@ int RUN(double eps, int scenario, int model)
     // Continuous output model
     else
     {
-        while(( V>0 || E > 0 || I > 0 ) && V <= 20)
+        while(( V>0 || E > 0 || I > 0 ) && V + W <= 2000)
         {
             // Update
             int update = 0;         // verification of update (while = 0 keep on searching for the index to update)
             int ind = 0;            // index for the transition to update
           
             // Transition rate vector
-            double rates[5];
+            double rates[7];
             
             // Reduction of virus production scenario
             if (scenario == 0)
@@ -187,8 +200,10 @@ int RUN(double eps, int scenario, int model)
                 rates[0] = beta*(double)T*(double)V;            // virus infecting cell
                 rates[1] = k*(double)E;                         // leaving eclipse phase
                 rates[2] = delta*(double)I;                     // cell death
-                rates[3] = p*(1-eps)*(double)I;                 // virus production
+                rates[3] = mu*p*(1-eps)*(double)I;              // inf virus production
                 rates[4] = c*(double)V;                         // virus clearance
+                rates[5] = (1-mu)*p*(1-eps)*(double)I;			// non-inf virus production
+                rates[6] = c*(double)W;							// virus clearance
             }
                 
             // Reduction of infectivity scenario
@@ -197,8 +212,10 @@ int RUN(double eps, int scenario, int model)
                 rates[0] = beta*(1-eps)*(double)T*(double)V;    // virus infecting cell
                 rates[1] = k*(double)E;                         // leaving eclipse phase
                 rates[2] = delta*(double)I;                     // cell death
-                rates[3] = p*(double)I;                         // virus production
+                rates[3] = mu*p*(double)I;                         // virus production
                 rates[4] = c*(double)V;                         // virus clearance
+                rates[5] = (1-mu)*p*(double)I;
+                rates[6] = c*(double)W;
             }     
             
             // Increase of virus clearance
@@ -207,23 +224,27 @@ int RUN(double eps, int scenario, int model)
                 rates[0] = beta*(double)T*(double)V;    // virus infecting cell
                 rates[1] = k*(double)E;                         // leaving eclipse phase
                 rates[2] = delta*(double)I;                     // cell death
-                rates[3] = p*(double)I;                         // virus production
+                rates[3] = mu*p*(double)I;                         // virus production
                 rates[4] = c*(double)V/(1-eps);                 // virus clearance
+                rates[5] = (1-mu)*p*(double)I;
+                rates[6] = c*(double)W/(1-eps);
             }
 
 	    if (scenario == 3)
 	    {
-		rates[0] = beta*(double)T*(double)V;
-		rates[1] = k*(double)E;
-		rates[2] = delta*(double)I/(1-eps);
-		rates[3] = p*(double)I;
-		rates[4] = c*(double)V;
+			rates[0] = beta*(double)T*(double)V;
+			rates[1] = k*(double)E;
+			rates[2] = delta*(double)I/(1-eps);
+			rates[3] = mu*p*(double)I;
+			rates[4] = c*(double)V;
+			rates[5] = (1-mu)*p*(double)I;
+			rates[6] = c*(double)W;
 	    }
                       
             // Draw two uniform random numbers for updating
             double rand1, dt;
             rand1 = gsl_ran_flat(r, 0.0, 1.0);  
-            dt = gsl_ran_exponential(r, 1/accumulate(rates,rates+5,0.));  
+            dt = gsl_ran_exponential(r, 1/accumulate(rates,rates+7,0.));  
             
             // Time update
             t += dt;
@@ -231,7 +252,7 @@ int RUN(double eps, int scenario, int model)
             // Population update
             while (update == 0)
             {
-                if (rand1 < accumulate(rates,rates+ind+1,0.)/accumulate(rates,rates+5,0.))
+                if (rand1 < accumulate(rates,rates+ind+1,0.)/accumulate(rates,rates+7,0.))
                 {
                     update = 1;
                     
@@ -262,11 +283,22 @@ int RUN(double eps, int scenario, int model)
                     }     
                     
                     // virus death
-                    else
+                    else if (ind == 4)
                     {
                         V--;
                     }
                     
+                    // non-inf virus production
+                    else if (ind == 5)
+                    {
+                    	W++;	
+                    }
+
+                    // non-inf virus clearance
+                    else
+                    {
+                        W--;
+                    }
                 }
                
                 ind++;
@@ -274,10 +306,10 @@ int RUN(double eps, int scenario, int model)
         } 
     }
             
-    if (V > 0)
+    if (V + W > 0)
     {
         return_value = 1;
-        ofstream file ("esttime_LN_V0_10_eps_" + to_string(eps) + "_sc_" + to_string(scenario) + "_model_" + to_string(model) + ".txt", ios::app);   // file output, average
+        ofstream file ("esttime_LN_V0_1_eps_" + to_string(eps) + "_sc_" + to_string(scenario) + "_model_" + to_string(model) + ".txt", ios::app);   // file output, average
         file << t;  
         file << "\n";
         file.close();

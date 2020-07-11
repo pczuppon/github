@@ -14,15 +14,16 @@ os.chdir(os.path.realpath(''))
 ################################
 
 ################################ within-host dynamics
-R0 = 7. 
+R0 = 7.69 
 k = 5
-delta = 0.58
+delta = 0.595
 c = 10.
-p = 116.
-B = p/delta
-T = 40000
+p = 112000
+mu = 0.001
+B = mu*p/delta
+T = 4000
 
-beta = c*delta*R0/((p-delta*R0)*T)
+beta = c*delta*R0/((mu*p-delta*R0)*T)
 
 ################################ drug efficacy
 eps = np.arange(0,1,0.0001)
@@ -99,7 +100,7 @@ surv11 = []
 #surv12 = []
 
 for i in range(len(eps)):
-    p2 = (1-eps[i])*p
+    p2 = (1-eps[i])*p*mu
     
     surv1.append(max(0,1-(c/(c+beta*T)+delta/p2)))
     surv11.append(max(0,1-(c/(c+beta*T)+delta/p2)**10))
@@ -113,8 +114,8 @@ surv21 = []
 for i in range(len(eps)):
     beta2 = (1-eps[i])*beta
     
-    surv2.append(max(0,1-(c/(c+beta2*T)+delta/p)))
-    surv21.append(max(0,1-(c/(c+beta2*T)+delta/p)**10))
+    surv2.append(max(0,1-(c/(c+beta2*T)+delta/(mu*p))))
+    surv21.append(max(0,1-(c/(c+beta2*T)+delta/(mu*p))**10))
 #    surv22.append(max(0,1-(c/(c+beta2*T)+delta/p)**100))
 
 

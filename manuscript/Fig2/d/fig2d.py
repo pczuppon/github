@@ -14,15 +14,16 @@ os.chdir(os.path.realpath(''))
 ################################
 
 ################################ within-host dynamics
-R0 = 7. 
+R0 = 7.69 
 k = 5
-delta = 0.58
+delta = 0.595
 c = 10.
-p = 116.
-B = p/delta
-T = 39900
+p = 112000
+mu = 0.001
+B = mu*p/delta
+T = 4000
 
-beta = c*delta*R0/((p-delta*R0)*T)
+beta = c*delta*R0/((mu*p-delta*R0)*T)
 
 ################################ drug efficacy
 eps1 = 0.5
@@ -111,14 +112,14 @@ surv13 = []
 survneu = []
 
 for i in range(len(V0)):
-    p2 = (1-eps1)*p
+    p2 = (1-eps1)*p*mu
 #    p21 = (1-eps2)*p
-    p22 = (1-eps3)*p
+    p22 = (1-eps3)*p*mu
     
     surv1.append(max(0,1-(c/(c+beta*T)+delta/p2)**V0[i]))
 #    surv12.append(max(0,1-(c/(c+beta*T)+delta/p21)**V0[i]))
     surv13.append(max(0,1-(c/(c+beta*T)+delta/p22)**V0[i]))
-    survneu.append(max(0,1-(c/(c+beta*T)+delta/p)**V0[i]))
+    survneu.append(max(0,1-(c/(c+beta*T)+delta/(mu*p))**V0[i]))
     
 
 ################################ Reducing infectivity
@@ -131,9 +132,9 @@ for i in range(len(V0)):
 #    beta21 = (1-eps2)*beta
     beta22 = (1-eps3)*beta
     
-    surv2.append(max(0,1-(c/(c+beta2*T)+delta/p)**V0[i]))
+    surv2.append(max(0,1-(c/(c+beta2*T)+delta/(mu*p))**V0[i]))
 #    surv22.append(max(0,1-(c/(c+beta21*T)+delta/p)**V0[i]))
-    surv23.append(max(0,1-(c/(c+beta22*T)+delta/p)**V0[i]))
+    surv23.append(max(0,1-(c/(c+beta22*T)+delta/(mu*p))**V0[i]))
 
 ################################
 ################################ Plot surv prob
