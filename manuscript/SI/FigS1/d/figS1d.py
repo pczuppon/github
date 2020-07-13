@@ -16,16 +16,17 @@ os.chdir(os.path.realpath(''))
 ################################
 
 ################################ within-host dynamics
-R0 = 7 
+R0 = 7.69 
 k = 5
-delta = 0.58
+delta = 0.595
 c = 10.
-p = 116
+p = 112000
+mu = 0.001
 
-B = p/delta
-T = 490000
+B = mu*p/delta
+T = 4000
 
-beta = c*delta*R0/((p-delta*R0)*T)
+beta = c*delta*R0/((mu*p-delta*R0)*T)
 
 ################################ drug efficacy
 eps = np.arange(0,1,0.0001)
@@ -75,22 +76,22 @@ for i in range(len(my_data)):
     eps_data4.append(float(my_data[i][0]))
 
 ################################ Reducing burst size, I0=100
-my_data = genfromtxt('surv_HN_V0_100_sc_0_model_0.txt', delimiter=',')
+#my_data = genfromtxt('surv_HN_V0_100_sc_0_model_0.txt', delimiter=',')
 
-data5 = []
-eps_data5 = []
-for i in range(len(my_data)):
-    data5.append(float(my_data[i][1]))
-    eps_data5.append(float(my_data[i][0]))
+#data5 = []
+#eps_data5 = []
+#for i in range(len(my_data)):
+#    data5.append(float(my_data[i][1]))
+#    eps_data5.append(float(my_data[i][0]))
 
 ################################ Reducing infectivity, I0=10
-my_data = genfromtxt('surv_HN_V0_100_sc_1_model_0.txt', delimiter=',')
+#my_data = genfromtxt('surv_HN_V0_100_sc_1_model_0.txt', delimiter=',')
 
-data6 = []
-eps_data6 = []
-for i in range(len(my_data)):
-    data6.append(float(my_data[i][1]))
-    eps_data6.append(float(my_data[i][0]))
+#data6 = []
+#eps_data6 = []
+#for i in range(len(my_data)):
+#    data6.append(float(my_data[i][1]))
+#    eps_data6.append(float(my_data[i][0]))
 
 ################################
 ################################ Surv prob of virus
@@ -99,7 +100,7 @@ for i in range(len(my_data)):
 ################################ Reducing burst size
 surv1 = []
 surv11 = []
-surv12 = []
+#surv12 = []
 for i in range(len(eps)):
     Balt = (1-eps[i])*B
     def f(z):
@@ -107,12 +108,12 @@ for i in range(len(eps)):
     
     surv1.append(max(0,1-fsolve(f,0.5)))
     surv11.append(max(0,1-(fsolve(f,0.5))**10))
-    surv12.append(max(0,1-(fsolve(f,0.5))**100))
+    #surv12.append(max(0,1-(fsolve(f,0.5))**100))
 
 ################################ Reducing infectivity
 surv2 = []
 surv21 = []
-surv22 = []
+#surv22 = []
 for i in range(len(eps)):
     betaalt = (1-eps[i])*beta
     def f(z):
@@ -120,7 +121,7 @@ for i in range(len(eps)):
     
     surv2.append(max(0,1-fsolve(f,0.5)))
     surv21.append(max(0,1-(fsolve(f,0.5))**10))
-    surv22.append(max(0,1-(fsolve(f,0.5))**100))
+    #surv22.append(max(0,1-(fsolve(f,0.5))**100))
 
 
 ################################
@@ -134,10 +135,10 @@ plt.plot(eps,surv11,linewidth=3,color='C0',linestyle='dashed')
 plt.plot(eps_data3,data3,'o',color='C0',markersize=10)
 plt.plot(eps,surv21,linewidth=3,color='C1',linestyle='dashed')
 plt.plot(eps_data4,data4,'o',color='C1',markersize=10)
-plt.plot(eps,surv12,linewidth=3,color='C0',linestyle='dotted')
-plt.plot(eps_data5,data5,'o',color='C0',markersize=10)
-plt.plot(eps,surv22,linewidth=3,color='C1',linestyle='dotted')
-plt.plot(eps_data6,data6,'o',color='C1',markersize=10)
+#plt.plot(eps,surv12,linewidth=3,color='C0',linestyle='dotted')
+#plt.plot(eps_data5,data5,'o',color='C0',markersize=10)
+#plt.plot(eps,surv22,linewidth=3,color='C1',linestyle='dotted')
+#plt.plot(eps_data6,data6,'o',color='C1',markersize=10)
 
 plt.ylim((-0.05,1.05))
 plt.tick_params(axis='both', which='major', labelsize=15, width=1, length=10)

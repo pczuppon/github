@@ -16,26 +16,27 @@ os.chdir(os.path.realpath(''))
 ################################
 
 ################################ within-host dynamics
-R0 = 7 
+R0 = 7.69 
 k = 5
-delta = 0.58
+delta = 0.595
 c = 10.
-p = 13.2
-B = p/delta
-T = 6000000
+p = 112000
+mu = 0.001
+B = mu*p/delta
+T = 4000
 
-beta = c*delta*R0/((p-delta*R0)*T)
+beta = c*delta*R0/((mu*p-delta*R0)*T)
 
 ################################ drug efficacy
 eps = np.arange(0,1,0.0001)
-V0 = 100
+V0 = 10
 
 ################################
 ################################ Import Data
 ################################
 
 ################################ Reducing burst size (2x)
-my_data = genfromtxt('comb_LN_V0_%s_sc_0.txt' % V0, delimiter=',')
+my_data = genfromtxt('comb_HN_V0_%s_sc_0.txt' % V0, delimiter=',')
 
 data1 = []
 eps_data1 = []
@@ -44,7 +45,7 @@ for i in range(len(my_data)):
     eps_data1.append(float(my_data[i][0]))
 
 ################################ Reducing burst size + infectivity
-my_data = genfromtxt('comb_LN_V0_%s_sc_1.txt' % V0, delimiter=',')
+my_data = genfromtxt('comb_HN_V0_%s_sc_1.txt' % V0, delimiter=',')
 
 data2 = []
 eps_data2 = []
@@ -53,7 +54,7 @@ for i in range(len(my_data)):
     eps_data2.append(float(my_data[i][0]))
 
 ################################ Reducing infectivity (2x)
-my_data = genfromtxt('comb_LN_V0_%s_sc_2.txt' % V0, delimiter=',')
+my_data = genfromtxt('comb_HN_V0_%s_sc_2.txt' % V0, delimiter=',')
 
 data3 = []
 eps_data3 = []
@@ -69,13 +70,13 @@ for i in range(len(my_data)):
 ################################ Combination therapy
 surv1 = []
 for i in range(len(eps)):
-    p2 = (1-eps[i])*p
+    p2 = (1-eps[i])*p*mu
     delta2 = delta/(1-eps[i])
     surv1.append(max(0,1-(c/(c+beta*T)+delta2/p2)**V0))
 
 surv2 = []
 for i in range(len(eps)):
-    p2 = (1-eps[i])*p
+    p2 = (1-eps[i])*p*mu
     beta2 = beta*(1-eps[i])
     surv2.append(max(0,1-(c/(c+beta2*T)+delta/p2)**V0))
 
@@ -83,15 +84,15 @@ surv3 = []
 for i in range(len(eps)):
     c2 = c/(1-eps[i])
     beta2 = beta*(1-eps[i])
-    surv3.append(max(0,1-(c2/(c2+beta2*T)+delta/p)**V0))
+    surv3.append(max(0,1-(c2/(c2+beta2*T)+delta/(mu*p))**V0))
 
 surv4 = []
 surv5 = []
 for i in range(len(eps)):
-    p2 = p*(1-eps[i])
+    p2 = p*(1-eps[i])*mu
     beta2 = beta*(1-eps[i])
     surv4.append(max(0,1-(c/(c+beta*T)+delta/p2)**V0))
-    surv5.append(max(0,1-(c/(c+beta2*T)+delta/p)**V0))
+    surv5.append(max(0,1-(c/(c+beta2*T)+delta/(mu*p))**V0))
 
 ################################
 ################################ Plot surv prob
@@ -105,7 +106,7 @@ plt.plot(eps_data2,data2,'o',color='black',markersize=10)
 plt.plot(eps,surv3,linewidth=3,color='black',linestyle='dotted')
 plt.plot(eps_data3,data3,'o',color='black',markersize=10)
 
-plt.ylim((-0.05,1.05))
+plt.ylim((-0.05,0.4))
 plt.tick_params(axis='both', which='major', labelsize=15, width=1, length=10)
 plt.tick_params(axis='both', which='minor', labelsize=10, width=1, length=5)
 plt.show()
