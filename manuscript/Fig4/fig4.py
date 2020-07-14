@@ -106,10 +106,10 @@ for j in range(len(eps)):
         t4.append(sol.t_events[0][0])   
 
 
-plt.plot(eps[0:len(t1)],t1,linewidth=3,color='C0')
-plt.plot(eps[0:len(t2)],t2,linewidth=3,color='C1')
-plt.plot(eps[0:len(t3)],t3,linewidth=3,color='C2')
-plt.plot(eps[0:len(t4)],t4,linewidth=3,color='C3')
+plt.plot(eps[0:80],t1[0:80],linewidth=3,color='C0')
+plt.plot(eps[0:80],t2[0:80],linewidth=3,color='C1')
+plt.plot(eps[0:80],t3[0:80],linewidth=3,color='C2')
+plt.plot(eps[0:80],t4[0:80],linewidth=3,color='C3')
 
 #plt.axvspan(eps[len(t2)-1],1.,facecolor = 'grey',alpha=0.75)
 #plt.axvspan(eps[len(t1)-1],1.,facecolor = 'grey',alpha=0.25)

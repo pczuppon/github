@@ -16,7 +16,7 @@ os.chdir(os.path.realpath(''))
 ################################ R0 = 7, LN
 print("R0=7.69, LN")
 V0 = [1,10]
-eps_data = [0.9]
+eps_data = [0]
 for j in range(len(eps_data)):
     print(eps_data[j])
     for k in range(len(V0)):
