@@ -11,8 +11,21 @@
 \begin{document}
 
 \begin{tikzpicture}
-	\node[anchor=south west,inner sep=0] (Bild) at (0,0) {\includegraphics[scale=0.39]{figS2a_blank.pdf}};
+   		\node[anchor=south west,inner sep=0] (Bild) at (0,0) {\includegraphics[scale=0.39]{figS2a_blank.pdf}};
    		\begin{scope}[x=(Bild.south east),y=(Bild.north west)]
+<<<<<<< HEAD
+					  	
+        	\draw (.5,-0.035) node {antiviral drug efficacy $\varepsilon_j$};
+        	\draw (0.0,0.5) node [rotate=90] {est. probability $\psi_j$};
+        	 
+        	        	        	
+        	\draw[nblue,very thick] (0.15,0.5) -- (0.2,.5);
+        	\draw (0.2,0.53) node[right=3pt] {\color{black}\small reducing viral};
+        	\draw (0.2,0.47) node[right=3pt] {\color{black}\small production $p$};
+        	\draw[orange,very thick] (0.15,0.3) -- (0.2,0.3);
+        	\draw (0.2,0.3) node[right=3pt] {\color{black}\small reducing infectivity $\beta$};
+    		\end{scope}
+=======
         	\draw (0.5,-0.035) node {antiviral drug efficacy $\varepsilon_j$};
         	\draw (0.01,0.5) node [rotate=90] {establishment probability $\varphi_j$};
         	\draw[thick] (0.175,0.83) --  (0.225,0.83);
@@ -27,6 +40,7 @@
 			\draw[orange,thick] (0.6,0.78) -- node[right=6pt] {\scriptsize \color{black} reducing $\beta$}(0.65,0.78);
 			
     	\end{scope}
+>>>>>>> master
 \end{tikzpicture}
 
 \end{document}
