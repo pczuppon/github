@@ -7,6 +7,7 @@
 \usepackage{fourier}
 
 \definecolor{nblue}{RGB}{31, 119, 180}
+\definecolor{py_olive}{rgb}{0.5, 0.5, 0}
 
 \begin{document}
 
@@ -18,10 +19,11 @@
         	\draw (0.5,-0.035) node {proportion of susceptible target cells};
         	\draw (-0.02,0.5) node [] {$R_0$};
         	
-        	\draw[orange] (0.175,0.68) node {\tiny $10^6$};
-        	\draw[orange] (0.36,0.82) node {\tiny $10^7$};
+        	\draw[orange] (0.175,0.68) node {\tiny $10^5$};
+        	\draw[orange] (0.3,0.68) node {\tiny $10^6$};
+        	\draw[orange] (0.4,0.82) node {\tiny $10^7$};
         	\draw[orange] (0.54,0.82) node {\tiny $10^8$};
-        	\draw[orange] (0.71,0.82) node {\tiny $10^9$};
+        	\draw[orange] (0.68,0.82) node {\tiny $10^9$};
         	\draw[orange] (0.81,0.825) node {\tiny $10^{10}$};
         
         	\draw[nblue] (0.95,0.4) node {\tiny 9 days};
@@ -30,13 +32,19 @@
         	\draw[nblue] (0.95,0.56) node {\tiny 6 days};
         	\draw[nblue] (0.95,0.66) node {\tiny 5 days};
         	\draw[nblue] (0.95,0.8) node {\tiny 4 days};
+        	\draw[nblue] (0.6,.9) node {\tiny 3 days};
 
-			\fill[black] (0.6,0.25) circle (.07cm);
-			\draw (0.6,0.25) node[right= 2pt] {\tiny Young et al. (2020)}; 
-			\fill[lightgray,opacity=0.5] (0.6,0.2) circle (.07cm);   
-			\draw (0.6,0.2) node[right= 2pt] {\tiny W{\"o}lfel et al. (2020)}; 			
-			\fill[gray] (0.6,0.15) circle (.07cm);             	
-        	\draw (0.6,0.15) node[right= 2pt] {\tiny France (unpublished)}; 
+			\fill[black] (0.65,0.28) circle (.07cm);
+			\draw (0.65,0.28) node[right= 2pt] {\tiny Young et al. (2020)}; 
+			\fill[gray] (0.65,0.23) circle (.07cm);   
+			\draw (0.65,0.23) node[right= 2pt] {\tiny W{\"o}lfel et al. (2020)}; 			
+			\fill[gray,opacity=0.6] (0.65,0.18) circle (.07cm);             	
+        	\draw (0.65,0.18) node[right= 2pt] {\tiny To et al. (2020)};
+        	
+        	\fill[py_olive] (0.65,0.13) circle (.07cm);            
+        	\draw (0.65,0.13) node[right= 2pt] {\tiny Kissler et al. (2020)};  
+			%\fill[gray] (0.6,0.13) circle (.07cm);             	
+        	%\draw (0.6,0.13) node[right= 2pt] {\tiny France (unpublished)}; 
    		\end{scope}
 \end{tikzpicture}
 
