@@ -146,7 +146,7 @@ for i in range(len(days)):
         ind_max = min(np.where(res_days[i,:]>18.7)[0])-1
     else:
         ind_max = len(res_days[i,:])
-    plt.semilogx(prop[0:ind_max],res_days[i,0:ind_max],linewidth=2,color='C0')
+    plt.semilogx(T0*prop[0:ind_max],res_days[i,0:ind_max],linewidth=2,color='C0')
 
 for i in range(len(load)):
     if (min(res_load[i,:])<18.7):
@@ -156,9 +156,9 @@ for i in range(len(load)):
         ind_min = 0
         ind_max = len(res_load[i,:])
     if (i == 1 or i==0):
-        plt.plot(prop[ind_min:ind_max+1],res_load[i,ind_min:ind_max+1],linewidth=2,color='C1')
+        plt.plot(T0*prop[ind_min:ind_max+1],res_load[i,ind_min:ind_max+1],linewidth=2,color='C1')
     else:
-    	plt.plot(prop[ind_min-1:ind_max+1],res_load[i,ind_min-1:ind_max+1],linewidth=2,color='C1')
+    	plt.plot(T0*prop[ind_min-1:ind_max+1],res_load[i,ind_min-1:ind_max+1],linewidth=2,color='C1')
 
 ################ add data points
 ######### France
@@ -273,7 +273,7 @@ while (update == 0):
             else:
                 R0 += 0.1
 
-plt.plot(frac_Sing/100,res_Sing,marker="o",color="black",markersize=10)
+plt.plot(T0*frac_Sing/100,res_Sing,marker="o",color="black",markersize=10)
 
 ################# Germany
 R0 = 3
@@ -326,7 +326,7 @@ while (update == 0):
             else:
                 R0 += 0.1
 
-plt.plot(frac_Ger/100,res_Ger,marker="o",color="gray",markersize=10)
+plt.plot(T0*frac_Ger/100,res_Ger,marker="o",color="gray",markersize=10)
 
 ################ add data points
 ######### Hongkong
@@ -385,7 +385,7 @@ while (update == 0):
             else:
                 R0 += 0.1
 
-plt.plot(frac_Hongkong/100,res_Hongkong,marker="o",color="darkgray",markersize=10)
+plt.plot(T0*frac_Hongkong/100,res_Hongkong,marker="o",color="darkgray",markersize=10)
 
 ################ add data points
 ######### NBA
@@ -444,7 +444,7 @@ while (update == 0):
             else:
                 R0 += 0.1
 
-plt.plot(frac_nba/100,res_nba,marker="o",color="olive",markersize=10)
+plt.plot(T0*frac_nba/100,res_nba,marker="o",color="olive",markersize=10)
 
 
 ########################## Finish plot
