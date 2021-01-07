@@ -72,22 +72,22 @@ for i in range(len(my_data)):
 
 
 ################################ Reducing burst size, V0=100
-#my_data = genfromtxt('surv_HB_V0_100_sc_0_model_1.txt', delimiter=',')
+my_data = genfromtxt('surv_HN_V0_100_sc_0_model_1.txt', delimiter=',')
 
-#data5 = []
-#eps_data5 = []
-#for i in range(len(my_data)):
-#    data5.append(float(my_data[i][1]))
-#    eps_data5.append(float(my_data[i][0]))
+data5 = []
+eps_data5 = []
+for i in range(len(my_data)):
+    data5.append(float(my_data[i][1]))
+    eps_data5.append(float(my_data[i][0]))
 
 ################################ Reducing infectivity, V0=100
-#my_data = genfromtxt('surv_HB_V0_100_sc_1_model_1.txt', delimiter=',')
+my_data = genfromtxt('surv_HN_V0_100_sc_1_model_1.txt', delimiter=',')
 
-#data6 = []
-#eps_data6 = []
-#for i in range(len(my_data)):
-#    data6.append(float(my_data[i][1]))
-#    eps_data6.append(float(my_data[i][0]))
+data6 = []
+eps_data6 = []
+for i in range(len(my_data)):
+    data6.append(float(my_data[i][1]))
+    eps_data6.append(float(my_data[i][0]))
 
 
 ################################
@@ -97,26 +97,26 @@ for i in range(len(my_data)):
 ################################ Reducing burst size
 surv1 = []
 surv11 = []
-#surv12 = []
+surv12 = []
 
 for i in range(len(eps)):
     p2 = (1-eps[i])*p*mu
     
     surv1.append(max(0,1-(c/(c+beta*T)+delta/p2)))
     surv11.append(max(0,1-(c/(c+beta*T)+delta/p2)**10))
-#    surv12.append(max(0,1-(c/(c+beta*T)+delta/p2)**100))
+    surv12.append(max(0,1-(c/(c+beta*T)+delta/p2)**100))
 
 ################################ Reducing infectivity
 surv2 = []
 surv21 = []
-#surv22 = []
+surv22 = []
 
 for i in range(len(eps)):
     beta2 = (1-eps[i])*beta
     
     surv2.append(max(0,1-(c/(c+beta2*T)+delta/(mu*p))))
     surv21.append(max(0,1-(c/(c+beta2*T)+delta/(mu*p))**10))
-#    surv22.append(max(0,1-(c/(c+beta2*T)+delta/p)**100))
+    surv22.append(max(0,1-(c/(c+beta2*T)+delta/(mu*p))**100))
 
 
 ################################
@@ -130,10 +130,10 @@ plt.plot(eps,surv11,linewidth=3,color='C0',linestyle='dashed')
 plt.plot(eps_data3,data3,'o',color='C0',markersize=10)
 plt.plot(eps,surv21,linewidth=3,color='C1',linestyle='dashed')
 plt.plot(eps_data4,data4,'o',color='C1',markersize=10)
-#plt.plot(eps,surv12,linewidth=3,color='C0',linestyle='dotted')
-#plt.plot(eps_data5,data5,'o',color='C0',markersize=10)
-#plt.plot(eps,surv22,linewidth=3,color='C1',linestyle='dotted')
-#plt.plot(eps_data6,data6,'o',color='C1',markersize=10)
+plt.plot(eps,surv12,linewidth=3,color='C0',linestyle='dotted')
+plt.plot(eps_data5,data5,'o',color='C0',markersize=10)
+plt.plot(eps,surv22,linewidth=3,color='C1',linestyle='dotted')
+plt.plot(eps_data6,data6,'o',color='C1',markersize=10)
 
 plt.ylim((-0.05,1.05))
 plt.tick_params(axis='both', which='major', labelsize=15, width=1, length=10)
